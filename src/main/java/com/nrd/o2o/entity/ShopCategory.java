@@ -10,6 +10,24 @@ public class ShopCategory {
 	private Integer priority;
 	private Date createTime;
 	private Date lastEditTime;
+	
+	public ShopCategory() {
+		super();
+	}
+
+	public ShopCategory(Long shopCategoryId, String shopCategoryName, String shopCateforyDesc, String shopCateforyImg,
+			Integer priority, Date createTime, Date lastEditTime, ShopCategory parent) {
+		super();
+		this.shopCategoryId = shopCategoryId;
+		this.shopCategoryName = shopCategoryName;
+		this.shopCateforyDesc = shopCateforyDesc;
+		this.shopCateforyImg = shopCateforyImg;
+		this.priority = priority;
+		this.createTime = createTime;
+		this.lastEditTime = lastEditTime;
+		this.parent = parent;
+	}
+
 	private ShopCategory parent;
 
 	public Long getShopCategoryId() {

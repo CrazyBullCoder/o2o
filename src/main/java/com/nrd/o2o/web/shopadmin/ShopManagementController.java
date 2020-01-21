@@ -2,6 +2,7 @@ package com.nrd.o2o.web.shopadmin;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,6 +41,31 @@ public class ShopManagementController {
 	private ShopCategoryService shopCategoryService;
 	@Autowired
 	private AreaService areaService;
+
+	/*
+	 * @GetMapping("/getshoplist")
+	 * 
+	 * @ResponseBody private Map<String, Object> getShopList(HttpServletRequest
+	 * request){ Map<String, Object> modleMap = new HashMap<>(); List<Area> areaList
+	 * = new ArrayList<>(); List<ShopCategory> shopCategorieList = new
+	 * ArrayList<>();
+	 * 
+	 * PersonInfo user = (PersonInfo) request.getSession().getAttribute("user");
+	 * user.setUserId(1L); Long employeeId = user.getUserId();
+	 * 
+	 * Area area1 = new Area(1, "areaName1", 1, new Date(), new Date()); Area area2
+	 * = new Area(2, "areaName2", 0, new Date(), new Date()); Area area3 = new
+	 * Area(2, "areaName3", -1, new Date(), new Date()); areaList.add(area1);
+	 * areaList.add(area2); areaList.add(area3);
+	 * 
+	 * ShopCategory shopCategory1 = new ShopCategory(); ShopCategory shopCategory2 =
+	 * new ShopCategory(); shopCategorieList.add(shopCategory1);
+	 * shopCategorieList.add(shopCategory2);
+	 * 
+	 * List<Shop> shopList = new ArrayList<>(); return null;
+	 * 
+	 * }
+	 */
 
 	@RequestMapping(value = "/getshopbyid", method = RequestMethod.GET)
 	@ResponseBody

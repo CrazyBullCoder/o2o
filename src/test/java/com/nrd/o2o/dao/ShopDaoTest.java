@@ -3,7 +3,9 @@ package com.nrd.o2o.dao;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +19,24 @@ public class ShopDaoTest extends BaseTest{
 	@Autowired
 	private ShopDao shopDao;
 	@Test
-	public void queryByShopId() {
+	public void testQueryShopListAndCount(){
+		Shop shopCondition = new Shop();
+		PersonInfo owner = new PersonInfo();
+		owner.setUserId(1L);
+		shopCondition.setOwner(owner);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 10);
+		int shopCount = shopDao.queryShopCount(shopCondition);
+		System.out.println(shopList.size());
+		System.out.println(shopCount);
+		ShopCategory sc = new ShopCategory();
+		sc.setShopCategoryId(3L);
+		shopCondition.setShopCategory(sc);
+		shopList = shopDao.queryShopList(shopCondition, 0, 2);
+		shopCount = shopDao.queryShopCount(shopCondition);
+		System.out.println(shopCount);
+	}
+	@Test
+	public void testQueryByShopId() {
 		Shop shop = shopDao.queryByShopId(55L);
 		System.out.println(shop.getArea().getAreaId());
 		System.out.println(shop.getArea().getAreaName());
