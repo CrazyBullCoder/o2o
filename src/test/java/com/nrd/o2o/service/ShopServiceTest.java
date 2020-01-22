@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,17 @@ public class ShopServiceTest extends BaseTest{
 
 	@Autowired
 	private ShopService shopService;
+	
+	@Test
+	public void testGetShopList(){
+		Shop shopCondition = new Shop();
+		ShopCategory sc = new ShopCategory();
+		sc.setShopCategoryId(1L);
+		shopCondition.setShopCategory(sc);
+		ShopExecution se = shopService.getShopList(shopCondition, 2, 6);
+		System.out.println(se.getShopList().size());
+		System.out.println(se.getCount());
+	}
 	
 	@Test
 	public void testModifyShop() throws FileNotFoundException {

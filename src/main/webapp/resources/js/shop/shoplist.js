@@ -1,6 +1,6 @@
 $(function(){
-	//getshoplist();
-	function getlist(e){
+	getshoplist();
+	function getshoplist(e){
 		$.ajax({
 			url : "/o2o/shopadmin/getshoplist",
 			type : "get",
