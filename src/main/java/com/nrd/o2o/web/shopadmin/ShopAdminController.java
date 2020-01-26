@@ -1,6 +1,7 @@
 package com.nrd.o2o.web.shopadmin;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,5 +20,9 @@ public class ShopAdminController {
 	@RequestMapping(value = "/shopmanagement")
 	public String shopManagement() {
 		return "shop/shopmanagement";
+	}
+	@GetMapping(value = "/productcategorymanagement")
+	public String productCategoryManagement() {
+		return "shop/productcategorymanagement";
 	}
 }
