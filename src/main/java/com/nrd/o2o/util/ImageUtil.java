@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.nrd.o2o.dto.ImageHolder;
+
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.geometry.Positions;
 
@@ -19,16 +21,16 @@ public class ImageUtil {
 	private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 	private static final Random r = new Random();
 
-	public static String gererateThumbnail(File shopImg, String targetAddr) {
+	public static String generateThumbnail(ImageHolder thumbnail, String targetAddr) {
 		String realFileName = getRandomFileName();
-		String extension = getFileExtension(shopImg);
+		String extension = getFileExtension(thumbnail.getImageName());
 		makeDirPath(targetAddr);
 		String relativeAddr = targetAddr + realFileName + extension;
 		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
 		// File dest = new File("E:\\Pictures\\upload\\item\\shop\\37");
 		File waterMark = new File(basePath + "\\watermark.jpg");
 		try {
-			Thumbnails.of(shopImg).size(160, 160).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(waterMark), 0.5f)
+			Thumbnails.of(thumbnail.getImage()).size(160, 160).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(waterMark), 0.5f)
 			.outputQuality(0.8).toFile(dest);
 			
 			/*
@@ -117,5 +119,23 @@ public class ImageUtil {
 			}
 			fileOrPath.delete();
 		}
+	}
+
+	public static String generateNormalImg(ImageHolder thumbnail, String targetAddr) {
+		String realFileName = getRandomFileName();
+		String extension = getFileExtension(thumbnail.getImageName());
+		makeDirPath(targetAddr);
+		String relativeAddr = targetAddr + realFileName + extension;
+		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+		// File dest = new File("E:\\Pictures\\upload\\item\\shop\\37");
+		File waterMark = new File(basePath + "\\watermark.jpg");
+		try {
+			Thumbnails.of(thumbnail.getImage()).size(337160, 640).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(waterMark), 0.5f)
+			.outputQuality(0.9f).toFile(dest);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return relativeAddr;
 	}
 }

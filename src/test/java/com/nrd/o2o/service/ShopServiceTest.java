@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nrd.o2o.BaseTest;
+import com.nrd.o2o.dto.ImageHolder;
 import com.nrd.o2o.dto.ShopExecution;
 import com.nrd.o2o.entity.Area;
 import com.nrd.o2o.entity.PersonInfo;
@@ -18,13 +19,13 @@ import com.nrd.o2o.entity.Shop;
 import com.nrd.o2o.entity.ShopCategory;
 import com.nrd.o2o.enums.ShopStateEnum;
 
-public class ShopServiceTest extends BaseTest{
+public class ShopServiceTest extends BaseTest {
 
 	@Autowired
 	private ShopService shopService;
-	
+
 	@Test
-	public void testGetShopList(){
+	public void testGetShopList() {
 		Shop shopCondition = new Shop();
 		ShopCategory sc = new ShopCategory();
 		sc.setShopCategoryId(1L);
@@ -33,7 +34,7 @@ public class ShopServiceTest extends BaseTest{
 		System.out.println(se.getShopList().size());
 		System.out.println(se.getCount());
 	}
-	
+
 	@Test
 	public void testModifyShop() throws FileNotFoundException {
 		Shop shop = new Shop();
@@ -41,9 +42,11 @@ public class ShopServiceTest extends BaseTest{
 		shop.setShopName("修改后的店铺名称");
 		File shopImg = new File("E:\\Pictures\\2.jpg");
 		InputStream is = new FileInputStream(shopImg);
-		ShopExecution shopExecution = shopService.modifyShop(shop, is, "dabai.jpg");
-		System.out.println("新的图片地址为："+shopExecution.getShop().getShopImg());
+		ImageHolder imageHolder = new ImageHolder("dabai.jpg", is);
+		ShopExecution shopExecution = shopService.modifyShop(shop, imageHolder);
+		System.out.println("新的图片地址为：" + shopExecution.getShop().getShopImg());
 	}
+
 	@Test
 	public void testAddShop() throws FileNotFoundException {
 		Shop shop = new Shop();
@@ -68,7 +71,8 @@ public class ShopServiceTest extends BaseTest{
 		shop.setAdvice("审核中");
 		File shopImg = new File("E:\\Pictures\\1.jpg");
 		InputStream is = new FileInputStream(shopImg);
-		ShopExecution se = shopService.addShop(shop,is, shopImg.getName());
-		//assertEquals(ShopStateEnum.CHECK.getState(), se.getState());
+		ImageHolder imageHolder = new ImageHolder(shopImg.getName(), is);
+		ShopExecution se = shopService.addShop(shop, imageHolder);
+		// assertEquals(ShopStateEnum.CHECK.getState(), se.getState());
 	}
 }
